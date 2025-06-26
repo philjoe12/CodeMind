@@ -19,29 +19,40 @@ Modern LLMs are powerful but constrained by token limits (typically 8K for API c
 
 🎯 Key Features
 1. Intelligent Code Retrieval
-python# CodeMind automatically retrieves relevant code context
+```python
+# CodeMind automatically retrieves relevant code context
 context = codemind.get_context("implement user authentication")
 # Returns: Relevant auth modules, similar implementations, security patterns
+```
 2. Real-time Error Monitoring
-python# Stream errors and get instant AI-powered fixes
+```python
+# Stream errors and get instant AI-powered fixes
 async for error in codemind.monitor_errors():
     fix = await codemind.suggest_fix(error)
     print(f"Error: {error.message}")
     print(f"Fix: {fix.solution}")
+```
 3. Stochastic Test Generation
-python# Generate comprehensive test suites automatically
+```python
+# Generate comprehensive test suites automatically
 tests = codemind.generate_tests(
     function=my_function,
     strategies=["boundary", "property", "mutation", "adversarial"]
 )
+```
 📦 Installation
-bashpip install codemind
+```bash
+pip install codemind
+```
 Or install from source:
-bashgit clone https://github.com/yourusername/codemind.git
+```bash
+git clone https://github.com/yourusername/codemind.git
 cd codemind
 pip install -e .
+```
 🚀 Quick Start
-pythonfrom codemind import CodeMind
+```python
+from codemind import CodeMind
 from codemind.models import OpenAIReasoning
 
 # Initialize with your codebase
@@ -66,8 +77,10 @@ fix = await mind.fix_error(error)
 print(fix.solution)
 print(fix.explanation)
 print(fix.related_files)
+```
 🏗️ Architecture
-mermaidgraph TD
+```mermaid
+graph TD
     A[Your Code Editor] --> B[CodeMind]
     B --> C[RAG Engine]
     B --> D[Error Monitor]
@@ -83,6 +96,7 @@ mermaidgraph TD
     K --> L[OpenAI o1]
     K --> M[Claude 3]
     K --> N[Local Models]
+```
 📊 How It Works
 
 Indexing: CodeMind parses your codebase using AST analysis and creates semantic embeddings
@@ -93,7 +107,8 @@ Validation: Continuously validates memory accuracy and updates stale information
 
 🛠️ Configuration
 Create a codemind.yaml file in your project root:
-yaml# codemind.yaml
+```yaml
+# codemind.yaml
 indexing:
   languages: ["python", "javascript", "typescript"]
   ignore_patterns: ["**/test_*", "**/*.min.js"]
@@ -113,8 +128,15 @@ memory:
   validation_interval: "24h"
   max_memory_age: "30d"
   compression_level: "aggressive"  # or "balanced", "minimal"
+```
 📈 Performance
-MetricCodeMindBaseline (No Memory)Context Relevance94%67%Fix Success Rate87%52%Test Coverage91%45%Response Time<200ms<100msToken Efficiency8K (compressed)128K (raw)
+| Metric | CodeMind | Baseline (No Memory) |
+| --- | --- | --- |
+| Context Relevance | 94% | 67% |
+| Fix Success Rate | 87% | 52% |
+| Test Coverage | 91% | 45% |
+| Response Time | <200ms | <100ms |
+| Token Efficiency | 8K (compressed) | 128K (raw) |
 🔌 Integrations
 CodeMind integrates with popular development tools:
 
@@ -125,7 +147,8 @@ CLI: codemind fix error.log
 
 🤝 Contributing
 We love contributions! See our Contributing Guide for details.
-bash# Setup development environment
+```bash
+# Setup development environment
 git clone https://github.com/yourusername/codemind.git
 cd codemind
 python -m venv venv
@@ -137,6 +160,7 @@ pytest
 
 # Run with coverage
 pytest --cov=codemind
+```
 🗺️ Roadmap
 
  Core RAG implementation
