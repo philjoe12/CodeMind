@@ -184,7 +184,7 @@ OpenAI and Anthropic for reasoning models
 
 📞 Support
 
-📧 Email: support@codemind.ai
+📧 Email: phill@bluebear.ai
 💬 Discord: Join our community
 🐛 Issues: GitHub Issues
 📖 Docs: docs.codemind.ai
