@@ -1,5 +1,6 @@
 import time
 import numpy as np
+import resource
 
 
 class PerformanceBenchmark:
@@ -25,16 +26,36 @@ class PerformanceBenchmark:
         return results
 
     async def benchmark_indexing(self):
-        raise NotImplementedError("Indexing benchmark not implemented")
+        start = time.time()
+        self.engine.index_codebase()
+        return {"seconds": time.time() - start}
 
     async def benchmark_compression(self):
-        raise NotImplementedError("Compression benchmark not implemented")
+        dummy = [
+            {
+                "content": "x = 1",
+                "file_path": "tmp.py",
+                "start_line": 1,
+                "end_line": 1,
+                "chunk_type": "block",
+                "similarity": 1.0,
+            }
+        ] * 50
+        start = time.time()
+        self.engine.context_compressor.compress_chunks(dummy)
+        return {"seconds": time.time() - start}
 
     async def benchmark_fix_generation(self):
-        raise NotImplementedError("Fix generation benchmark not implemented")
+        generate = getattr(self.engine, "generate_fix", None)
+        if not generate:
+            return {"supported": False}
+        start = time.time()
+        await generate({"message": "test"})
+        return {"seconds": time.time() - start, "supported": True}
 
     async def benchmark_memory_usage(self):
-        raise NotImplementedError("Memory usage benchmark not implemented")
+        usage = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+        return {"max_rss": usage}
 
     async def benchmark_retrieval(self):
         """Target: <100ms for 95th percentile"""
